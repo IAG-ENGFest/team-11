@@ -1,18 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cyberpunk Fireworks</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="canvas-wrapper">
-        <canvas id="fireworksCanvas" width="1280" height="720"></canvas>
-      </div>
-      <button id="fireworksBtn">Launch Fireworks</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAG Cargo Drop - Maximize Shareholder Value!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="header">
+            <h1>IAG CARGO DROP</h1>
+            <div id="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Cash:</span>
+                    <span id="money" class="stat-value">£1000</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">High Score:</span>
+                    <span id="high-score" class="stat-value">£1000</span>
+                </div>
+            </div>
+        </div>
+        
+        <canvas id="game-canvas"></canvas>
+        
+        <div id="cargo-stats">
+            <h3>Cargo Landed</h3>
+            <div class="cargo-counts">
+                <div class="cargo-stat">
+                    <span class="cargo-label">Small:</span>
+                    <span id="small-count">0</span>
+                </div>
+                <div class="cargo-stat">
+                    <span class="cargo-label">Medium:</span>
+                    <span id="medium-count">0</span>
+                </div>
+                <div class="cargo-stat">
+                    <span class="cargo-label">Large:</span>
+                    <span id="large-count">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="game-over" class="hidden">
+            <div class="game-over-content">
+                <h2>GAME OVER</h2>
+                <p id="final-message"></p>
+                <div id="final-stats"></div>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+        
+        <div id="instructions">
+            <h2>IAG CARGO DROP</h2>
+            <div class="instructions-content">
+                <p class="tagline">Maximize Shareholder Value!</p>
+                
+                <div class="game-rules">
+                    <div class="rule">
+                        <strong>🎯 Objective:</strong> Land freight safely to earn cash
+                    </div>
+                    <div class="rule">
+                        <strong>💰 Starting Cash:</strong> £1000
+                    </div>
+                    <div class="rule">
+                        <strong>📦 Freight Values:</strong> Small £100 | Medium £200 | Large £400
+                    </div>
+                    <div class="rule">
+                        <strong>⚠️ Parachute Hit:</strong> Lose 2x freight value
+                    </div>
+                    <div class="rule">
+                        <strong>💥 Box Hit:</strong> Game Over
+                    </div>
+                    <div class="rule">
+                        <strong>🎮 Controls:</strong> ← → Arrow keys to steer freight
+                    </div>
+                </div>
+                
+                <p class="challenge">Avoid Triangle & Together airlines trying to steal your cargo!</p>
+            </div>
+            <button id="start-btn">START GAME</button>
+        </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+    
+    <script src="game.js"></script>
+</body>
 </html>

@@ -1,62 +1,244 @@
-/* Responsive canvas wrapper for vertical scaling */
-.canvas-wrapper {
-    width: min(100vw - 40px, calc((100vh - 120px) * 16 / 9));
-    height: min(calc(100vh - 120px), calc((100vw - 40px) * 9 / 16));
-    max-width: 1280px;
-    max-height: 720px;
-    aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-body {
-    background: linear-gradient(135deg, #0f2027, #2c5364 80%);
-    color: #fff;
-    font-family: 'Orbitron', 'Segoe UI', monospace;
+* {
     margin: 0;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
 }
 
-canvas {
-    box-shadow: 0 0 40px #00fff7, 0 0 80px #ff00c8;
-    background: rgba(20, 20, 30, 0.95);
-    border-radius: 16px;
-    margin-bottom: 32px;
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#game-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    max-width: 900px;
     width: 100%;
-    height: 100%;
-    aspect-ratio: 16 / 9;
-    display: block;
 }
 
-button {
-    background: #00fff7;
-    color: #222;
+#header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+#header h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-size: 1.2em;
+}
+
+.stat-item {
+    display: flex;
+    gap: 10px;
+}
+
+.stat-label {
     font-weight: bold;
-    text-shadow: 0 2px 8px #fff, 0 0 2px #00fff7;
-    border: none;
-    border-radius: 8px;
-    padding: 16px 32px;
-    font-size: 1.5rem;
-    font-family: 'Orbitron', 'Segoe UI', monospace;
-    cursor: pointer;
-    box-shadow: 0 0 20px #00fff7, 0 0 40px #00fff7;
-    transition: background 0.3s, color 0.3s;
-    letter-spacing: 1px;
+    opacity: 0.9;
 }
 
-button:active {
-    background: #ff00c8;
-    color: #fff;
-    text-shadow: 0 2px 12px #000, 0 0 4px #ff00c8;
+.stat-value {
+    font-weight: bold;
+    color: #FFD700;
+}
+
+#game-canvas {
+    display: block;
+    width: 100%;
+    height: 600px;
+    background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 50%, #90EE90 100%);
+    border-bottom: 4px solid #333;
+}
+
+#cargo-stats {
+    background: #f5f5f5;
+    padding: 15px 20px;
+    border-top: 2px solid #ddd;
+}
+
+#cargo-stats h3 {
+    text-align: center;
+    color: #1e3c72;
+    margin-bottom: 10px;
+}
+
+.cargo-counts {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.cargo-stat {
+    display: flex;
+    gap: 8px;
+    font-size: 1.1em;
+}
+
+.cargo-label {
+    font-weight: bold;
+    color: #555;
+}
+
+#instructions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.98);
+    padding: 40px 50px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    max-width: 600px;
+    border: 3px solid #1e3c72;
+}
+
+#instructions h2 {
+    color: #1e3c72;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tagline {
+    font-size: 1.3em;
+    color: #2a5298;
+    font-weight: bold;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.instructions-content {
+    text-align: left;
+}
+
+.game-rules {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.rule {
+    padding: 8px 0;
+    font-size: 1.05em;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.rule:last-child {
+    border-bottom: none;
+}
+
+.rule strong {
+    color: #1e3c72;
+}
+
+.challenge {
+    font-size: 1.1em;
+    color: #ff6347;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#instructions p {
+    margin-bottom: 10px;
+}
+
+#start-btn, #restart-btn {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#start-btn:hover, #restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
+}
+
+#start-btn:active, #restart-btn:active {
+    transform: translateY(0);
+}
+
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    z-index: 100;
+    min-width: 400px;
+}
+
+.game-over-content h2 {
+    font-size: 2.5em;
+    color: #ff4444;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#final-message {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+}
+
+#final-stats {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#final-stats p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Animation for money changes */
+@keyframes moneyFlash {
+    0%, 100% { color: #FFD700; }
+    50% { color: #FFA500; }
+}
+
+.money-increase {
+    animation: moneyFlash 0.5s;
+}
+
+.money-decrease {
+    animation: moneyFlash 0.5s;
+    color: #ff4444 !important;
 }
